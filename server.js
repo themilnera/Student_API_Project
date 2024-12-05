@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv").config();
 const mongodb = require("./db/connect");
 const app = express();
-const PORT = 3000;
 const helmet = require('helmet');
 
 app.use(
@@ -30,7 +30,7 @@ mongodb.initDb((err) => {
     console.log(err);
   }
   else{
-    app.listen(PORT);
-    console.log("\x1b[34m%s\x1b[0m", `Connected to DB, listening on ${PORT}`);
+    app.listen(process.env.PORT);
+    console.log("\x1b[34m%s\x1b[0m", `Connected to DB, listening on ${process.env.PORT}`);
   }
 });
