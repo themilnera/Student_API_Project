@@ -21,11 +21,12 @@ app.use(
 app.use(cors()).use("/", require("./routes"));
 
 
-
+console.log(`PORT: ${process.env.PORT}`)
 //initialize db, callback() called with just the first parameter
 //because we're not getting the db object without using getDb()
 mongodb.initDb((err) => {
   //if the first (error) parameter of callback() is anything but null
+  
   if(err){
     console.log(err);
   }
