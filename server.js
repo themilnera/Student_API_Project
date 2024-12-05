@@ -3,8 +3,24 @@ const cors = require("cors");
 const mongodb = require("./db/connect");
 const app = express();
 const PORT = 3000;
+const helmet = require('helmet');
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"], // Allow resources from your domain
+        imgSrc: ["'self'"], // Allow images from your domain
+        scriptSrc: ["'self'"], // Allow scripts from your domain
+        styleSrc: ["'self'"], // Allow styles from your domain
+      },
+    },
+  })
+);
 
 app.use(cors()).use("/", require("./routes"));
+
+
 
 //initialize db, callback() called with just the first parameter
 //because we're not getting the db object without using getDb()
