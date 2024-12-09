@@ -5,20 +5,29 @@ const mongodb = require("./db/connect");
 const app = express();
 const helmet = require('helmet');
 
+app.use(express.json());
+
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'"], // Allow resources from your domain
-        imgSrc: ["'self'"], // Allow images from your domain
-        scriptSrc: ["'self'"], // Allow scripts from your domain
-        styleSrc: ["'self'"], // Allow styles from your domain
+        defaultSrc: ["'self'", "*"], // Allow resources from your domain
+        imgSrc: ["'self'", "*"], // Allow images from your domain
+        scriptSrc: ["'self'", "*"], // Allow scripts from your domain
+        styleSrc: ["'self'", "*"], // Allow styles from your domain
       },
     },
   })
 );
 
-app.use(cors()).use("/", require("./routes"));
+app
+    .use(cors())
+    .use((req, res, next) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      console.log("request body:", req.body);
+      next();
+    })
+    .use("/", require("./routes"));
 
 
 console.log(`PORT: ${process.env.PORT}`)

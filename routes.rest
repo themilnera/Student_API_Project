@@ -6,3 +6,34 @@ GET http://localhost:3000/ HTTP/1.1
 
 ### get all students
 GET http://localhost:3000/students HTTP/1.1
+
+### get one student
+GET http://localhost:3000/students/6750dcbd300b65b2d333f024 HTTP/1.1
+
+### create student
+POST http://localhost:3000/students HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName" : "Phil",
+    "lastName" : "Conners",
+    "email" : "grumpyReporter@news.site",
+    "age" : 40,
+    "currentCollege" : "No college"
+}
+//Will throw error if blank line between Content-Type and {} is not there
+
+### update student
+PUT http://localhost:3000/students/6750dcbd300b65b2d333f024 HTTP/1.1
+Content-Type: application/json
+
+{
+    "firstName" : "Up",
+    "lastName" : "Date",
+    "email" : "updatetest@json.js",
+    "age" : 300,
+    "currentCollege" : "super mario college"
+}
+
+### delete student
+DELETE http://localhost:3000/students/67575a1cf6f425b4ae15c150 HTTP/1.1
